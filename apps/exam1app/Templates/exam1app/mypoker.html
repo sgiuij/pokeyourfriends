@@ -1,0 +1,52 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div>
+		<h1>Welcome,{{request.session.name}}</h1>
+		<p></p>
+	</div>
+	<div>
+		{% for poker in pokerinfo %}
+			<p>{{poker.pokerid}} poked you {{poker.pokecount}}</p>
+		{% endfor %}
+	</div>
+	<div>
+		{% for poked,pokers in pokes %}
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Alias</th>
+				<th>Email Address</th>
+				<th>Poke History</th>
+				<th>Action</th>
+			</tr>
+			<tr>
+				<th>{{poke.poked}}</th>
+				<th>{{poke.alias}}</th>
+				<th>{{poke.email}}</th>
+				<th>{{poke.pokecount}}</th>
+				<th>
+					<form action='/poke/{{poke.id}}' method='post'>
+						{% csrf_token %}
+						<input type ='submit' value = "Poke!">
+					</form>
+				</th>
+			</tr>
+		</table>
+		{% endfor %}
+
+
+	<form action='/blogs' method='post'>
+		{% csrf_token %}
+		<label for=''>Title</label>
+		<input type ='text' name ='title'>
+		<textarea name='blog' value='Enter blog'>
+		</textarea>
+		<input type ='submit' value = "Enter Blog">
+	</form>
+	</div>
+
+</body>
+</html>
